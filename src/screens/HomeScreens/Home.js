@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, TouchableOpacity } from 'react-native';
-import styles from '../styles/homeStyles'
+import styles from '../../styles/homeStyles'
 
 const Home = ({ navigation }) => {
 

@@ -5,9 +5,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, CommonActions } from '@react-navigation/native';
 
 
-import Home from './screens/Home';
-import Chess from './screens/Chess';
-import MineSweeper from './screens/MineSweeper';
+import Home from './screens/HomeScreens/Home';
+import Chess from './screens/ChessScreens/Chess';
+import MineSweeper from './screens/SweeperScreens/MineSweeper';
 
 const Stack = createStackNavigator();
 

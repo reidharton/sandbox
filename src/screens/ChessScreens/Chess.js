@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
-import styles from '../styles/chessStyles';
+import styles from '../../styles/chessStyles';
 
 const Chess = ({ navigation }) => {
 
