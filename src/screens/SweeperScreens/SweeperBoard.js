@@ -1,8 +1,6 @@
 import React, { memo } from 'react';
 import { connect } from 'react-redux';
-import { Text, View, Dimensions } from 'react-native';
-
-
+import { Text, View } from 'react-native';
 
 import SweeperTile from './SweeperTile';
 import styles from '../../styles/SweeperStyles/boardStyles';
@@ -13,7 +11,8 @@ const SweeperBoard = ({ board }) => {
    <View style={styles.container}>
      {board.flat().map((tile, index) => (
        <SweeperTile 
-        key={index}
+          key={index}
+          tile={tile}
        />
      ))}
    </View>

@@ -1,34 +1,59 @@
-import React, { memo } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Text, View, Dimensions } from 'react-native';
+import { Text, View, Dimensions, TouchableOpacity, TouchableHighlightComponent } from 'react-native';
 import { uncover, rightClick } from "../../store/actions/sweeperActions";
 
 import styles from '../../styles/SweeperStyles/boardStyles';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
-const FLAG = <span role="img">&#9873;</span>;
-const BOMB = <span role="img">&#128163;</span>;
-const colors = {
-  0: 'lightgrey',
-  1: 'blue',
-  2: 'green',
-  3: 'red',
-  4: 'purple',
-  5: 'maroon',
-  6: 'turquoise',
-  7: 'black',
-  8: 'grey',
-}
+const FLAG = '\u2691';
+const BOMB = '💣';
 
-const SweeperTile = ({ board }) => {
+const SweeperTile = ({ board, tile, uncover, rightClick }) => {
+  const [tapCount, setTapCount] = useState(0);
+
+  const handleTap = () => {
+    console.log('on the top', tapCount)
+    if(tapCount === 0){
+      setTimeout(() => {
+        console.log('tapcount', tapCount)
+        if(tapCount === 1){
+
+          uncover(tile);
+        }
+        setTapCount(0)
+      }, 200)
+      setTapCount(tapCount + 1);
+    }else if(tapCount === 1){
+      console.log('second one')
+      rightClick(tile);
+      setTapCount(0);
+    }
+   
+   
+  }
+
+  useEffect(() => {
+    console.log('use effect', tile)
+    if(tile.row === 9 && tile.col === 9){
+    }
+  }, [tapCount])
 
   return (
-    <View 
-      style={[styles.tile, {width: WIDTH / board.length, height: WIDTH / board.length}]}
+    <TouchableOpacity 
+      style={[styles.tile, {
+        width: WIDTH / board.length, 
+        height: WIDTH / board.length,
+      }, !tile.covered && {backgroundColor: 'grey'}]}
+      onPress={handleTap}
     >
-      
-    </View>
+      {(() => {
+          return <Text style={{color: 'white'}}>{
+            tile.flag ? FLAG : tile.hit ? BOMB : ''
+          }</Text>
+      })()}
+    </TouchableOpacity>
   )
 }
 
@@ -43,39 +68,3 @@ const MapDispatchToProps = {
 }
 
 export default connect(MapStateToProps, MapDispatchToProps)(memo(SweeperTile))
-// const mapStateToProps = (state) => {
-//   return {board: state.board}
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     uncover: (payload) => dispatch(uncover(payload)),
-//     rightClick: (e, payload) => {
-//       e.preventDefault();
-//       dispatch(rightClick(payload))
-//     }
-//   }
-// }
-
-// const ConnectedTile = ({ uncover, rightClick, val, coord, board }) => {
-//   let char = (val.val === 'B') ? BOMB : val.val;
-//   char = (val.val !== 0) ? char : '';
-//   let charColor = !val.flag ? colors[val.val] : 'rgb(77, 15, 15)';
-//   let backgroundColor = val.covered ? 'grey' : 'lightgrey';
-//   backgroundColor = val.hit ? 'red' : backgroundColor;
-//   return (
-//     <div className={styles.tile}
-//          onClick={()=> uncover({coord, board})}
-//          onContextMenu={(e) => rightClick(e, {coord, board})}>
-//       <div className={styles.box}
-//             style={{backgroundColor: backgroundColor, color: charColor}}>
-//         {!val.covered && char}
-//         {val.flag && FLAG}
-//       </div>
-//     </div>
-//   )
-// }
-
-// const Tile = connect(mapStateToProps, mapDispatchToProps)(ConnectedTile);
-
-// export default Tile;

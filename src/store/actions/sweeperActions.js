@@ -1,7 +1,7 @@
 import types from '../actionTypes/sweeperTypes';
 
-export function uncover(payload) {
-  return { type: UNCOVER, payload }
+export function uncover(tile) {
+  return { type: types.UNCOVER, tile }
 }
 
 export function seedBoard(dimensions) {
@@ -12,8 +12,8 @@ export function updateBoard(board) {
   return { type: types.UPDATE_BOARD, board }
 }
 
-export function rightClick(payload) {
-  return { type: types.RIGHT_CLICK, payload }
+export function rightClick(tile) {
+  return { type: types.RIGHT_CLICK, tile }
 }
 
 export function gameOver(board) {

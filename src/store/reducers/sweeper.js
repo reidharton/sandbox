@@ -9,7 +9,8 @@ const initialState = {
 }
 
 function sweeperReducer(state = initialState, action) {
-  const { board } = action;
+  const { tile, board } = action;
+
   switch(action.type){
     case types.SEED_BOARD:
       const { dimensions } = action;
@@ -19,6 +20,7 @@ function sweeperReducer(state = initialState, action) {
       })
     case types.UPDATE_BOARD:
       const { mines, uncovered, gameStatus } = state;
+
       const status = (mines + uncovered + board.uncovered === 100) ?
         'WON' : (uncovered + board.uncovered === 0) ?
         "STARTED" : gameStatus;
@@ -26,6 +28,21 @@ function sweeperReducer(state = initialState, action) {
       return Object.assign({}, state, {
         gameStatus: status,
         board
+      })
+    case types.RIGHT_CLICK:
+      // console.log('right click')
+      const newBoard = [...state.board]
+      // console.log('before',newBoard[[tile.row][tile.col]])
+      newBoard[tile.row][tile.col].flag = !state.board[tile.row][tile.col].flag
+      console.log('after',newBoard[tile.row][tile.col])
+      return Object.assign({}, state, {
+        board: newBoard
+      })
+    case types.UNCOVER:
+      console.log('uncovering',tile)
+        
+      return Object.assign({}, state, {
+
       })
     case types.GAME_OVER:
       return {
@@ -50,7 +67,6 @@ const createNewBoard = (dimensions) => {
   const newBoard = generateEmptyBoard(dimensions)
   placeBombs(newBoard);
   placeNumbers(newBoard);
-  console.log(newBoard[0])
   return newBoard;
 }
 
@@ -59,7 +75,14 @@ const generateEmptyBoard = (dimensions) => {
   for(let i = 0; i < dimensions; i++){
     let newRow = [];
     for(let j = 0; j < dimensions; j++){
-      newRow.push({val: 0, covered: true, flag: false, hit: false});
+      newRow.push({
+        val: 0, 
+        row: i,
+        col: j,
+        hit: false,
+        flag: false,
+        covered: true,
+      });
     }
     board.push(newRow);
   }
