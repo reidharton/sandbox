@@ -7,6 +7,7 @@ import { NavigationContainer, CommonActions } from '@react-navigation/native';
 
 import Home from './screens/Home';
 import Chess from './screens/Chess';
+import MineSweeper from './screens/MineSweeper';
 
 const Stack = createStackNavigator();
 
@@ -27,10 +28,8 @@ const Stacks = () => {
         }}
       >
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen 
-          name="Chess" 
-          component={Chess}
-        />
+        <Stack.Screen name="Chess" component={Chess} />
+        <Stack.Screen name="MineSweeper" component={MineSweeper} />
       </Stack.Navigator>
     </NavigationContainer>
   );

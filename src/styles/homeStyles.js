@@ -4,8 +4,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#36413E'
+    justifyContent: 'space-around',
+    backgroundColor: '#36413E',
   },
   button: {
     width: 150,

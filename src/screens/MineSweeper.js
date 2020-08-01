@@ -1,12 +1,14 @@
 import React, { memo } from 'react';
+import { connect } from 'react-redux';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { connect } from 'react-redux'
-import styles from '../styles/chessStyles';
+import styles from '../styles/sweeperStyles'
 
-const Chess = ({ navigation }) => {
+
+const MineSweeper = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+
       <TouchableOpacity 
         style={styles.button}
         onPress={() => navigation.navigate('Home')}>
@@ -22,4 +24,4 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {}
 
-export default memo(Chess);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(MineSweeper))
