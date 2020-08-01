@@ -1,0 +1,18 @@
+import React, { memo } from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import styles from '../styles/chessStyles';
+
+const Chess = ({ navigation }) => {
+
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity 
+        style={styles.button}
+        onPress={() => navigation.navigate('Home')}>
+        <Text style={styles.text}>Home</Text>
+      </TouchableOpacity>
+    </View>
+  )
+}
+
+export default memo(Chess);
