@@ -5,10 +5,9 @@ import styles from '../../styles/SweeperStyles'
 
 import { seedBoard } from '../../store/actions/sweeperActions';
 
-import Board from './Board';
+import SweeperBoard from './SweeperBoard';
 
 const MineSweeper = ({ navigation, gameStatus, seedBoard }) => {
-  // console.log(props)
   useEffect(() => {
     if(gameStatus === 'PENDING'){
       seedBoard(10)
@@ -17,12 +16,7 @@ const MineSweeper = ({ navigation, gameStatus, seedBoard }) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity 
-        style={styles.button}
-        onPress={() => navigation.navigate('Home')}>
-        <Text style={styles.text}>Home</Text>
-      </TouchableOpacity>
-      <Board />
+      <SweeperBoard/>
     </View>
   )
 }

@@ -8,6 +8,7 @@ import { NavigationContainer, CommonActions } from '@react-navigation/native';
 import Home from './screens/HomeScreens/Home';
 import Chess from './screens/ChessScreens/Chess';
 import MineSweeper from './screens/SweeperScreens/MineSweeper';
+import SweeperBoard from './screens/SweeperScreens/SweeperBoard';
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,7 @@ const Stacks = () => {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Chess" component={Chess} />
         <Stack.Screen name="MineSweeper" component={MineSweeper} />
+        <Stack.Screen name="SweeperBoard" component={SweeperBoard} />
       </Stack.Navigator>
     </NavigationContainer>
   );
