@@ -1,7 +1,8 @@
 import types from '../actionTypes/sweeperTypes'
 
 const initialState = {
-  gameStatus: 'PENDING',
+  gameWon: false,
+  gameLost: false,
   board: [],
   mines: 10,
   flags: 0,
@@ -10,7 +11,8 @@ const initialState = {
 
 function sweeperReducer(state = initialState, action) {
   const { tile, board } = action;
-  
+  let lost, won = false;
+
   switch(action.type){
     case types.SEED_BOARD:
       const { dimensions } = action;
@@ -18,45 +20,28 @@ function sweeperReducer(state = initialState, action) {
       return Object.assign({}, state, {
         board
       })
-    case types.UPDATE_BOARD:
-      const { mines, uncovered, gameStatus } = state;
-
-      const status = (mines + uncovered + board.uncovered === 100) ?
-        'WON' : (uncovered + board.uncovered === 0) ?
-        "STARTED" : gameStatus;
-
-      return Object.assign({}, state, {
-        gameStatus: status,
-        board
-      })
     case types.RIGHT_CLICK:
       // console.log('right click')
-
       return Object.assign({}, state, {
-        board: newBoard
+        
       })
     case types.UNCOVER:
-      console.log('uncovering', tile)
       const newBoard = [...state.board]  
       if(newBoard[tile.row][tile.col].flag){
         return state;
       }else if(isBomb(tile.row, tile.col, newBoard)){
-        console.log('uncover')
-        uncoverBoard(newBoard);
         newBoard[tile.row][tile.col].hit = true;
+        uncoverBoard(newBoard);
+        // lost = true;
       }
       newBoard[tile.row][tile.col].covered = false; 
+      won = (state.flags + state.uncovered) === 90;
       return Object.assign({}, state, {
-        board: newBoard
+        gameWon: won,
+        gameLost: lost,
+        board: newBoard,
+        uncovered: state.uncovered + 1
       })
-    case types.GAME_OVER:
-      return {
-        gameStatus: 'LOST',
-        uncovered: 0,
-        mines: 10,
-        flags: 0,
-        board
-      };
     default:
       return state;
   }

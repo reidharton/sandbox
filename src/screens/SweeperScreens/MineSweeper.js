@@ -7,23 +7,24 @@ import { seedBoard } from '../../store/actions/sweeperActions';
 
 import SweeperBoard from './SweeperBoard';
 
-const MineSweeper = ({ navigation, gameStatus, seedBoard }) => {
+const MineSweeper = ({ navigation, seedBoard, gameWon, gameLost }) => {
   useEffect(() => {
-    if(gameStatus === 'PENDING'){
-      seedBoard(10)
-    }
+    seedBoard(10)
   })
 
   return (
     <View style={styles.container}>
+      <View >
+        <Text>{gameWon ? 'WON' : gameLost ? 'LOST' : 'PLAY'}</Text>
+      </View>
       <SweeperBoard/>
     </View>
   )
 }
 
 const mapStateToProps = (state) => {
-  const { gameStatus } = state.sweeperReducer;
-  return { gameStatus }
+  const { gameWon, gameLost } = state.sweeperReducer;
+  return { gameWon, gameLost }
 }
 
 const mapDispatchToProps = {

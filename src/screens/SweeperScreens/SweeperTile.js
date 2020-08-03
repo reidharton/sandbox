@@ -45,7 +45,7 @@ const SweeperTile = ({ board, tile, uncover, rightClick }) => {
       style={[styles.tile, {
         width: WIDTH / board.length, 
         height: WIDTH / board.length,
-      }, !tile.covered && {backgroundColor: 'lightgrey'}]}
+      }, !tile.covered && {backgroundColor: 'darkgrey'}]}
     >
       {(!tile.covered && !tile.bomb) ?
       <Text>{tile.val !== 0 ? tile.val : ''}</Text> :
