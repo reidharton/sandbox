@@ -10,9 +10,14 @@ const styles = {
     alignContent: 'center',
   },
   tile: {
-    backgroundColor: 'black',
     borderWidth: 1,
-    borderColor: 'grey'
+    borderColor: 'grey',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'black',
+  },
+  button: {
+    borderRadius: 0
   }
 }
 

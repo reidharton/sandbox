@@ -10,7 +10,7 @@ const initialState = {
 
 function sweeperReducer(state = initialState, action) {
   const { tile, board } = action;
-
+  
   switch(action.type){
     case types.SEED_BOARD:
       const { dimensions } = action;
@@ -31,18 +31,23 @@ function sweeperReducer(state = initialState, action) {
       })
     case types.RIGHT_CLICK:
       // console.log('right click')
-      const newBoard = [...state.board]
-      // console.log('before',newBoard[[tile.row][tile.col]])
-      newBoard[tile.row][tile.col].flag = !state.board[tile.row][tile.col].flag
-      console.log('after',newBoard[tile.row][tile.col])
+
       return Object.assign({}, state, {
         board: newBoard
       })
     case types.UNCOVER:
-      console.log('uncovering',tile)
-        
+      console.log('uncovering', tile)
+      const newBoard = [...state.board]  
+      if(newBoard[tile.row][tile.col].flag){
+        return state;
+      }else if(isBomb(tile.row, tile.col, newBoard)){
+        console.log('uncover')
+        uncoverBoard(newBoard);
+        newBoard[tile.row][tile.col].hit = true;
+      }
+      newBoard[tile.row][tile.col].covered = false; 
       return Object.assign({}, state, {
-
+        board: newBoard
       })
     case types.GAME_OVER:
       return {
@@ -60,8 +65,17 @@ function sweeperReducer(state = initialState, action) {
 export default sweeperReducer;
 
 // Extract all this later
-const BOMB = 'B';
 const directions = [[0,1],[0,-1],[1,0],[-1,0],[1,1],[1,-1],[-1,1],[-1,-1]];
+
+const uncoverBoard = (board) => {
+  board.forEach((row) => {
+    row.forEach((tile) => {
+      if(!tile.flag && tile.bomb){
+        tile.covered = false;
+      }
+    })
+  })
+}
 
 const createNewBoard = (dimensions) => {
   const newBoard = generateEmptyBoard(dimensions)
@@ -81,6 +95,7 @@ const generateEmptyBoard = (dimensions) => {
         col: j,
         hit: false,
         flag: false,
+        bomb: false,
         covered: true,
       });
     }
@@ -97,7 +112,7 @@ const placeBombs = (emptyBoard) => {
       row = Math.floor(Math.random() * emptyBoard.length)
       col = Math.floor(Math.random() * emptyBoard.length)
     }while(emptyBoard[row][col].val !== 0)
-    emptyBoard[row][col].val = BOMB;
+    emptyBoard[row][col].bomb = true;
   }
   return emptyBoard;
 }
@@ -124,7 +139,7 @@ const checkSurrounding = (row, col, board) => {
 
 const isBomb = (row, col, board) => {
   if(isValidCoordinate(row, col, board)){
-    return board[row][col].val === BOMB;
+    return board[row][col].bomb;
   }
 }
 
