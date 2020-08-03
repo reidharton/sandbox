@@ -9,36 +9,39 @@ const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
 
-const SweeperTile = ({ board, tile, uncover, rightClick }) => {
+const SweeperTile = ({ play, board, tile, uncover, rightClick }) => {
   const [tapCount, setTapCount] = useState(0);
-
+  const [timer, setTimer] = useState(false);
   const icon = tile.flag ? 'flag' : tile.bomb ? 'bomb' : ''
   const color = tile.hit ? 'red' : tile.flag ? 'green' : 'black'
 
   const handleTap = () => {
-    uncover(tile);
-    // if(tapCount === 0){
-    //   setTapCount(tapCount + 1);
-    //   setTimeout(() => {
-    //     console.log('tapcount in setTimeout', tapCount)
-    //     if(tapCount === 1){
-
-    //       uncover(tile);
-    //     }
-    //     setTapCount(0)
-    //   }, 100)
-    // }else if(tapCount === 1){
-    //   console.log('second one')
-    //   rightClick(tile);
-    //   setTapCount(0);
-    // }
+    setTapCount(tapCount + 1)
   }
 
-  // useEffect(() => {
-  //   if(tile.row === 9 && tile.col === 9){
-  //     console.log('use effect', tile)
-  //   }
-  // }, [tapCount])
+  useEffect(() => {
+    // console.log(tapCount);
+    console.log('--------------------');
+    let interval = null;
+    if(tapCount === 0) {
+      interval = setInterval(() => {
+        if(tapCount > 1){
+          console.log('double click')
+        }else{
+          console.log('single click')
+        }
+        setTapCount(0)
+        setTimer(false)
+      }, 200)
+      setTimer(true);
+      setTapCount(tapCount + 1)
+    } else if(!timer){
+      setTapCount(0);
+    } else {
+      setTapCount(tapCount + 1)
+    }
+  }, [tapCount, timer])
+
 
   return (
     <View
@@ -52,7 +55,7 @@ const SweeperTile = ({ board, tile, uncover, rightClick }) => {
       <IconButton
         icon={icon}
         color={color}
-        onPress={handleTap}
+        onPress={play && handleTap}
         style={styles.button}
       /> 
       }

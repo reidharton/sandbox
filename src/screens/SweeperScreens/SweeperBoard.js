@@ -6,13 +6,15 @@ import SweeperTile from './SweeperTile';
 import styles from '../../styles/SweeperStyles/boardStyles';
 
 
-const SweeperBoard = ({ board }) => {
+const SweeperBoard = ({ play, board }) => {
+  console.log(board.length)
   return (
    <View style={styles.container}>
      {board.flat().map((tile, index) => (
        <SweeperTile 
           key={index}
           tile={tile}
+          play={play}
        />
      ))}
    </View>
