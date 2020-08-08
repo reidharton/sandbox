@@ -1,20 +1,23 @@
 import React, { memo } from 'react';
 import { connect } from 'react-redux';
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 
 import SweeperTile from './SweeperTile';
-import styles from '../../styles/SweeperStyles/boardStyles';
 
 
-const SweeperBoard = ({ play, board }) => {
-  console.log(board.length)
+const SweeperBoard = ({ board, toggle, style }) => {
+
+  const startPlay = () => {
+    toggle();
+  }
+
   return (
-   <View style={styles.container}>
+   <View style={[styles.container, style && style]}>
      {board.flat().map((tile, index) => (
        <SweeperTile 
           key={index}
           tile={tile}
-          play={play}
+          startPlay={startPlay}
        />
      ))}
    </View>
@@ -27,3 +30,15 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(memo(SweeperBoard));
+
+const styles = StyleSheet.create({
+  container: {
+    // height: '60%',
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignContent: 'center',
+    // marginVertical: 30
+  },
+})

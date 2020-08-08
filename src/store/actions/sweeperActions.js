@@ -4,8 +4,8 @@ export function uncover(tile) {
   return { type: types.UNCOVER, tile }
 }
 
-export function seedBoard(dimensions) {
-  return { type: types.SEED_BOARD, dimensions }
+export function seedBoard(bombs) {
+  return { type: types.SEED_BOARD, bombs }
 }
 
 export function updateBoard(board) {
@@ -18,4 +18,12 @@ export function rightClick(tile) {
 
 export function gameOver(board) {
   return { type: types.GAME_OVER, board }
+}
+
+export function togglePlay() {
+  return { type: types.TOGGLE_PLAY }
+}
+
+export function toggleFlagMode() {
+  return { type: types.TOGGLE_FLAG_MODE }
 }

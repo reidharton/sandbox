@@ -8,7 +8,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#36413E'
   },
   subContainer: {
-
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20
   },
   button: {
     width: 100,
@@ -20,12 +24,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
   counter: {
-    width: 150,
     height: 50,
     borderRadius: 16,
     alignItems: 'center',
     flexDirection: 'row',
     backgroundColor: 'black',
+  },
+  high: {
+    height: 50,
+    borderRadius: 16,
+    alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: 'black',
+    marginLeft: 15
   },
   label: {
     width: '65%',

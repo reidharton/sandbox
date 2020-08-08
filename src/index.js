@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer, CommonActions } from '@react-navigation/native';
 
 
-import Home from './screens/HomeScreens/Home';
+import HomeScreen from './screens/HomeScreens/HomeScreen';
 import Chess from './screens/ChessScreens/Chess';
 import MineSweeper from './screens/SweeperScreens/MineSweeper';
 import SweeperBoard from './screens/SweeperScreens/SweeperBoard';
@@ -28,7 +28,7 @@ const Stacks = () => {
           },
         }}
       >
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Chess" component={Chess} />
         <Stack.Screen name="MineSweeper" component={MineSweeper} />
         <Stack.Screen name="SweeperBoard" component={SweeperBoard} />

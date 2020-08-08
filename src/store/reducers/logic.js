@@ -11,9 +11,9 @@ export const uncoverBoard = (board) => {
   })
 }
 
-export const createNewBoard = (dimensions) => {
+export const createNewBoard = (dimensions, bombs) => {
   const newBoard = generateEmptyBoard(dimensions)
-  placeBombs(newBoard);
+  placeBombs(newBoard, bombs);
   placeNumbers(newBoard);
   return newBoard;
 }
@@ -38,10 +38,11 @@ const generateEmptyBoard = (dimensions) => {
   return board;
 }
 
-const placeBombs = (emptyBoard) => {
+// assuming a square board for now
+const placeBombs = (emptyBoard, numBombs) => {
   let row = 0;
   let col = 0;
-  for(let i = 0; i < emptyBoard.length; i++){
+  for(let i = 0; i < numBombs; i++){
     do{
       row = Math.floor(Math.random() * emptyBoard.length)
       col = Math.floor(Math.random() * emptyBoard.length)

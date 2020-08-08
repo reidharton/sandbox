@@ -1,47 +1,35 @@
 import React, { memo, useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text, Dimensions, StyleSheet } from 'react-native';
 import { IconButton } from 'react-native-paper';
 import { uncover, rightClick } from "../../store/actions/sweeperActions";
-import styles from '../../styles/SweeperStyles/boardStyles';
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 
+const colors = {
+  1: 'blue',
+  2: 'green',
+  3: 'red',
+  4: 'purple',
+  5: 'maroon',
+  6: 'turquoise',
+  7: 'black',
+  8: 'grey',
+}
 
-const SweeperTile = ({ play, board, tile, uncover, rightClick }) => {
-  const [tapCount, setTapCount] = useState(0);
-  const [timer, setTimer] = useState(false);
-  const icon = tile.flag ? 'flag' : tile.bomb ? 'bomb' : ''
-  const color = tile.hit ? 'red' : tile.flag ? 'green' : 'black'
+const SweeperTile = ({ play, flagMode, board, tile, uncover, rightClick, startPlay }) => {
 
-  const handleTap = () => {
-    setTapCount(tapCount + 1)
-  }
-
-  useEffect(() => {
-    // console.log(tapCount);
-    console.log('--------------------');
-    let interval = null;
-    if(tapCount === 0) {
-      interval = setInterval(() => {
-        if(tapCount > 1){
-          console.log('double click')
-        }else{
-          console.log('single click')
-        }
-        setTapCount(0)
-        setTimer(false)
-      }, 200)
-      setTimer(true);
-      setTapCount(tapCount + 1)
-    } else if(!timer){
-      setTapCount(0);
-    } else {
-      setTapCount(tapCount + 1)
+  const handleTilePress = (tile) => {
+    if(!play){
+      startPlay();
     }
-  }, [tapCount, timer])
-
+    if(flagMode){
+      rightClick(tile);
+    }else {
+      uncover(tile)
+    }
+  }
 
   return (
     <View
@@ -50,22 +38,31 @@ const SweeperTile = ({ play, board, tile, uncover, rightClick }) => {
         height: WIDTH / board.length,
       }, !tile.covered && {backgroundColor: 'darkgrey'}]}
     >
-      {(!tile.covered && !tile.bomb) ?
-      <Text>{tile.val !== 0 ? tile.val : ''}</Text> :
-      <IconButton
-        icon={icon}
-        color={color}
-        onPress={play && handleTap}
-        style={styles.button}
-      /> 
+      {tile.covered ?
+        <IconButton
+          size={20}
+          icon='flag'
+          color={tile.flag ? 'darkred' : 'black'}
+          onPress={() => handleTilePress(tile)}
+        /> 
+      : tile.bomb ? 
+        <IconButton
+          size={20}
+          icon='bomb'
+          color={tile.hit ? 'red' : 'black'}
+        />
+      : tile.val ?
+        <Text style={{color: colors[tile.val]}}>{tile.val}</Text>
+      : null
       }
+    
     </View>
   )
 }
 
 const MapStateToProps = (state) => {
-  const { board } = state.sweeperReducer;
-  return { board }
+  const { play, flagMode, board } = state.sweeperReducer; // sweeper
+  return { play, flagMode, board }
 }
 
 const MapDispatchToProps = {
@@ -74,3 +71,13 @@ const MapDispatchToProps = {
 }
 
 export default connect(MapStateToProps, MapDispatchToProps)(memo(SweeperTile))
+
+const styles = StyleSheet.create({
+  tile: {
+    borderWidth: 1,
+    borderColor: 'grey',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'black',
+  },
+})
