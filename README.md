@@ -10,7 +10,7 @@ options for anything during setup that you're asked for. Follow the link here fo
 instructions https://www.atlassian.com/git/tutorials/install-git#windows
 Verify your git installation by opening your terminal of choice and typing git --version
 <p>
-<img width="100" height="75" src="./git.png">
+<img width="300" height="75" src="./git.png">
 </p>
 
 
@@ -19,7 +19,7 @@ Download the most recent (LTS) version of Node here https://nodejs.org/en/.
 Alternatively, go here for installation steps to take care of the Expo as well https://expo.io/learn.
 Confirm your Node installation by opening your terminal of choice and typing node --version
 <p>
-<img width="100" height="75" src="./node.png">
+<img width="300" height="75" src="./node.png">
 </p>
 
 #### Expo
