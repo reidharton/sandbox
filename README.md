@@ -30,13 +30,13 @@ will have added a package manager called 'npm' to your machine. Simply open your
 ## To Use
 Fork this repository to your account. In the upper right hand corner you should find a button labeled 'Fork'
 <p>
-<img width="200" height="200" src="./fork.png">
+<img width="150" height="200" src="./fork.png">
 </p>
 
 This will fork a copy of the repository over to *your* account. Go to your github page. If you can't automatically see your copy of this repository, 
 click on 'Repositories' and you should find it there. Now click the green drop down button on your repository's page
 <p>
-<img width="200" height="200" src="./clone.png">
+<img width="150" height="200" src="./clone.png">
 </p>
 
 Copy the url in the box to your clipboard. Open your terminal and navigate to the directory in which you'd like to clone the folder into (it will make a folder called sandbox)
@@ -53,6 +53,6 @@ Once it's down downloading, simply type `npm start` and a browser window should 
 Download a code editor of your choice. I am partial to Visual Studio Code, but there are tons of options. https://code.visualstudio.com/. Open the file you'd like to tinker with and your changes should show on save.
 
 ## Technology
-This app is built with React-Native. To learn more about React-Native go here https://reactnative.dev/. React-Native is a sister of React https://reactjs.org/. (One is for phones and one is for web) Both use stylesheets, or the like, with tags that are very similar to CSS styling. For example, to alter the font size of text within a <p> (paragraph) tag in HTML would use the tag `font-size`, while to do the same within a React <div> or a React-Native <Text> would be `fontSize`. Depending on how deep you want to go in learning things, starting with css and html are great foundations, as React is built around HTML (web-browser speak)
+This app is built with React-Native. To learn more about React-Native go here https://reactnative.dev/. React-Native is a sister of React https://reactjs.org/. (One is for phones and one is for web) Both use stylesheets, or the like, with tags that are very similar to CSS styling. For example, to alter the font size of text within a < p > (paragraph) tag in HTML would use the tag `font-size`, while to do the same within a React <div> or a React-Native <Text> would be `fontSize`. Depending on how deep you want to go in learning things, starting with css and html are great foundations, as React is built around HTML (web-browser speak)
   
 Additionally, if you'd prefer to tinker with React rather than the React-Native found here, follow the same Fork -> Clone -> `cd directory` -> `npm install` -> `npm start` set of instructions above with this repository https://github.com/tyemacon/blitz-chess.git
