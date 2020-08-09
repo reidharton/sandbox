@@ -9,6 +9,9 @@ Before you can pull this repository down to your machine, you'll need to install
 options for anything during setup that you're asked for. Follow the link here for basic installation
 instructions https://www.atlassian.com/git/tutorials/install-git#windows
 Verify your git installation by opening your terminal of choice and typing git --version
+<p>
+<img width="800" height="500" src="./git.png">
+</p>
 
 
 #### Node
